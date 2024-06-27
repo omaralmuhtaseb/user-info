@@ -3,20 +3,20 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class UserWelcomeEmail extends Mailable
+class WelcomeUserEmail extends Mailable
 {
-    use Queueable, SerializesModels;
+   
+
 
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct($user)
     {
         //
     }
@@ -26,8 +26,9 @@ class UserWelcomeEmail extends Mailable
      */
     public function envelope(): Envelope
     {
+        dd('dd');
         return new Envelope(
-            subject: 'Welcome Email',
+            subject: 'Welcome',
         );
     }
 
@@ -35,9 +36,9 @@ class UserWelcomeEmail extends Mailable
      * Get the message content definition.
      */
     public function content(): Content
-    {
+    { dd('dd');
         return new Content(
-            view: 'emails.welcome',
+            view: 'emails.user-welcome',
         );
     }
 

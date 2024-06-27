@@ -38,18 +38,12 @@ class UserRequest extends FormRequest
     {
         $minAge = now()->subYears(18)->format('Y-m-d');
         return [
-            'name' => 'required|string',
-            'birthday' => 'required|date|before:' . $minAge,
-            'emails' => 'required|emails|unique:users,emails',
-            'phone' => 'required|string',
-            'password' => 'required|string|confirmed',
+            'name' => 'required|string|max:255',
+            'birthday' => 'required|date_format:Y-m-d|before:' . $minAge,
+            'email' => 'required|email|unique:users,email',
+            'phone' => 'required|string|max:255',
+            'password' => 'required|string|max:255|confirmed',
         ];
     }
 
-    public function prepareForValidation()
-    {
-        $this->merge([
-            'birthday' => Carbon::createFromFormat('d-m-Y', $this->birthday)->format('Y-m-d'),
-        ]);
-    }
 }
